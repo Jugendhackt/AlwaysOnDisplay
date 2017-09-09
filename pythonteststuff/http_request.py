@@ -73,7 +73,11 @@ def sender():
     all_rows = c.fetchall()
     print('1):', all_rows)
     return jsonify (
-        output=all_rows,
+        data=[
+            {
+                'text':all_rows[0][0],'title':all_rows[0][1],'time':all_rows[0][2]
+            }
+        ],
         #channel=channel,
         #anfrage=request.get_json(force=true)
         #param2=request.args["param2"],
