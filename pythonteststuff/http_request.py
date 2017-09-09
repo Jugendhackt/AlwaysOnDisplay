@@ -40,7 +40,7 @@ def receiver():
     column_name2 = "time"
     
     try:
-        sql = "INSERT INTO {tn} ({idf}, {cn1}, {cn2}) VALUES ('{title}', '{text}', '{time}')".\
+        sql = 'INSERT INTO {tn} ({idf}, {cn1}, {cn2}) VALUES ("{title}", "{text}", "{time}")'.\
         format(tn=table_name, idf=id_column, title=title, text=text, time=time, cn1=column_name1, cn2=column_name2)
         print(sql)
         c.execute(sql)
@@ -51,14 +51,26 @@ def receiver():
 
     conn.commit()
     #conn.close()
+@app.route('/sender', methods=["GET"])
+def sender():
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+    title = request.form["title"]
+    text = request.form["text"]
+    time = request.form["time"]
+    
+    
 
-    return jsonify (
-        success=True,
-        failure=False,
+    sql = "SELECT * FROM {tn} ORDER BY {time} DESC LIMIT 10" .\
+    format(tn=table_name, time=time)
+    print(sql)
+    c.execute(sql)
+    ''' return jsonify (
+
         #channel=channel,
         #anfrage=request.get_json(force=true)
         #param2=request.args["param2"],
         title=request.form["title"],
         text=request.form["text"],
         time=request.form["time"]
-    )
+    )'''
