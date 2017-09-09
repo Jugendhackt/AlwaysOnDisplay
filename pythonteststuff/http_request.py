@@ -9,15 +9,6 @@ sqlite_file = 'always_on_db.sqlite'
 table_name = 'notifications'
 
 
-@app.route('/summary')
-def summary():
-    return jsonify(
-        title="Twitter",
-        text="@TorbenWetter hat deinen Tweet geliked!",
-        time="19:52:35"
-    )
-
-
 @app.route('/receiver', methods=["POST"])
 def receiver():
     conn = sqlite3.connect(sqlite_file)
