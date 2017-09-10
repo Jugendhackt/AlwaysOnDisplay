@@ -1,7 +1,7 @@
 var cardViews = document.getElementById("card-views");
 
 function addCard(title, text, time) {
-    cardViews.innerHTML += "<h1>" + x + "</h1>" + "</br>" + y;
+    cardViews.innerHTML += '<div class="card brown darken-1">\n<div class="card-content white-text">\n<div class="row">\n<div class="col s3">\n<i class="medium material-icons card-icon green-text text-darken-2">message</i>\n</div>\n<div class="col s9">\n<span class="card-title">' + title + '</span>\n<p class="notification-text">' + truncate(text) + '</p>\n<p class="time">' + time + '</p>\n</div>\n</div>\n</div>\n</div>';
 }
 
 function truncate(text) {
@@ -39,8 +39,9 @@ function updateCards() {
             console.warn(request.statusText, request.responseText);
 
         var obj = JSON.parse(request.responseText);
-        console.log(obj);
-        addCard(obj.title, obj.text);
+
+        if (obj.success == "True")
+            addCard(obj.title, obj.text, obj.time);
     });
     request.send();
 }

@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask import jsonify
+from datetime import date
 import sqlite3
 
 app = Flask(__name__)
@@ -20,7 +21,7 @@ def receiver():
         print("no success")
         return jsonify(success=False)
 
-    time_value = request.form["time"]
+    time_value = str(int(request.form["time"]) - 1505000000000)
     text_value = request.form["text"]
     title_value = request.form["title"]
 
@@ -57,11 +58,17 @@ def sender():
     sql = "SELECT * FROM {tn} ORDER BY {time} DESC LIMIT 10". \
         format(tn=table_name, time=id_column_primary)
     c.execute(sql)
+
     all_rows = c.fetchall()
-    print('1):', all_rows)
-    return jsonify(
-        text=all_rows[0][0],
-        title=all_rows[0][1],
-        time=all_rows[0][2],
-        ok=True
-    )
+    if len(all_rows) == 0:
+        return jsonify(
+            success=False
+        )
+
+    for row in all_rows:
+        return jsonify(
+            success=True,
+            text=row[0],
+            title=row[1],
+            time=date.fromtimestamp((int(row[2]) + 1505000000000) / 1000.0)
+        )
