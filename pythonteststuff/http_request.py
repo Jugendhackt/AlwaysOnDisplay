@@ -66,6 +66,12 @@ def sender():
         )
 
     for row in all_rows:
+        print(jsonify(
+            success=True,
+            text=row[0],
+            title=row[1],
+            time=date.fromtimestamp((int(row[2]) + 1505000000000) / 1000.0)
+        ))
         return jsonify(
             success=True,
             text=row[0],
