@@ -14,7 +14,10 @@ def receiver():
     conn = sqlite3.connect(sqlite_file)
     c = conn.cursor()
 
-    if 'time' not in request.args or 'text' not in request.args or 'title' not in request.args:
+    print("connection")
+
+    if 'time' not in request.form or 'text' not in request.form or 'title' not in request.form:
+        print("no success")
         return jsonify(success=False)
 
     time_value = request.form["time"]
@@ -36,6 +39,7 @@ def receiver():
 
     conn.commit()
 
+    print("success")
     return jsonify(
         success=True,
         title=title_value,
@@ -56,10 +60,8 @@ def sender():
     all_rows = c.fetchall()
     print('1):', all_rows)
     return jsonify(
-        data=[
-            {
-                'text': all_rows[0][0], 'title': all_rows[0][1], 'time': all_rows[0][2]
-            }
-        ],
+        text=all_rows[0][0],
+        title=all_rows[0][1],
+        time=all_rows[0][2],
         ok=True
     )

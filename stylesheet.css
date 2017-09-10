@@ -13,6 +13,24 @@ html { /* Perfect Full Screen Background Image */
     background-size: cover;
 }
 
+span.card-title {
+    text-decoration: underline;
+}
+
 p.notification-text {
-    font-size: medium;
+    font-size: 1.8em;
+}
+
+p.time {
+    font-size: 0.9em;
+    text-align: right;
+}
+
+div.row {
+    margin-bottom: 0;
+}
+
+div.testtttttttt {
+    padding-left: 0;
+    padding-right: 0;
 }
