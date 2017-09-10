@@ -33,7 +33,6 @@ function biggestArgLength(args) {
 
 function updateCards() {
     var request = new XMLHttpRequest();
-
     request.open("GET", "http://127.0.0.1:5000/sender");
     request.addEventListener('load', function (event) {
         if (request.status < 200 || request.status >= 300)
