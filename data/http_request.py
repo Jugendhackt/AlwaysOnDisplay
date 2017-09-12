@@ -5,7 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 
-sqlite_file = 'always_on_db.sqlite'
+sqlite_file = 'data/always_on_db.sqlite'
 
 table_name = 'notifications'
 
